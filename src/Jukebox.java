@@ -4,6 +4,8 @@
  */
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -11,7 +13,10 @@ import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
@@ -19,20 +24,76 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 /* 1. Download the JavaZoom jar from here: http://bit.ly/javazoom
  * 2. Right click your project and add it as an External JAR (Under Java Build Path > Libraries).*/
 
-public class Jukebox implements Runnable {
-
+public class Jukebox implements Runnable, ActionListener {
+JFrame f = new JFrame();
+JPanel p = new JPanel();
+JButton b1 = new JButton();
+JButton b2 = new JButton();
+JButton b3 = new JButton();
+boolean bb=false;
+boolean tb=false;
+boolean wb=false;
+Song s = new Song("src/Imagine Dragons - Believer (with lyrics).mp3");
+Song t = new Song("Imagine Dragons - Thunder.mp3");
+Song w= new Song("Imagine Dragons - Whatever It Takes.mp3");
 	public static void main(String[] args) {
+		Jukebox j = new Jukebox();
+		j.set();
 		SwingUtilities.invokeLater(new Jukebox());
 	}
 
+	
+	public  void set() {
+		f.setVisible(true);
+		f.add(p);
+		f.setTitle("Imagine Dragon Songs");
+		p.add(b1);
+		b1.setText("Believer");
+		p.add(b2);
+		b2.setText("Thunder");
+		p.add(b3);
+		b3.setText("Whatever It Takes");
+		b1.addActionListener(this);
+		b2.addActionListener(this);
+		b3.addActionListener(this);
+		f.pack();
+	}
+	
+	public void actionPerformed(ActionEvent arg0) {
+		JButton buttonPressed = (JButton) arg0.getSource();
+		if(b1==buttonPressed&&bb==false) {
+			s.play();
+			bb=true;
+		}
+		else if(b2==buttonPressed&&tb==false) {
+			t.play();
+			tb=true;
+		}
+		else if(b3==buttonPressed&&wb==false) {
+			w.play();
+			wb=true;
+		}
+		else if(b1==buttonPressed&&bb==true) {
+			s.stop();
+			bb=false;
+		}
+		else if(b2==buttonPressed&&tb==true) {
+			t.stop();
+			tb=false;
+		}
+		else if(b3==buttonPressed&&wb==true) {
+			w.stop();
+			wb=false;
+		}
+	}
            public void run() {
 
 		// 3. Find an mp3 on your computer or on the Internet.
 		// 4. Create a Song
-Song s = new Song("src/Imagine Dragons - Believer (with lyrics).mp3");
+
 		// 5. Play the Song
 
-s.play();
+
 		/*
 		 * 6. Create a user interface for your Jukebox so that the user can to
 		 * choose which song to play. You can use can use a different button for
@@ -40,6 +101,8 @@ s.play();
 		 * cover is clicked, stop the currently playing song, and play the one
 		 * that was selected.
 		 */
+
+
           }
 	/* Use this method to add album covers to your Panel. */
 	private JLabel loadImage(String fileName) {

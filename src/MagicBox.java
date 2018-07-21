@@ -18,6 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class MagicBox extends JPanel implements Runnable, MouseListener {
+JFrame f =new JFrame();
+MediaPalace mp =new MediaPalace();
+
 
 	/*
 	 * Work together as a TEAM of 2 or 3 to make this project. We are going to hide secrets within the magic box. 
@@ -37,6 +40,11 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	
 		
 		
+	}
+	
+	public void Set() {
+		f.setVisible(true);
+		f.addMouseListener(this);
 	}
 
 	@Override
@@ -102,6 +110,9 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 		
 	}
 
+	
+	
+	
 }
 
 
