@@ -17,7 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class MagicBox extends JPanel implements Runnable, MouseListener {
+public class MagicBox extends JPanel implements Runnable, MouseListener  {
 JFrame f =new JFrame();
 MediaPalace mp =new MediaPalace();
 
@@ -36,6 +36,8 @@ MediaPalace mp =new MediaPalace();
 	BufferedImage backgroundImage;
 
 	public static void main(String[] args) throws Exception {
+		MagicBox mb =new MagicBox();
+		mb.Set();
 		SwingUtilities.invokeLater(new MagicBox());
 	
 		
@@ -78,12 +80,15 @@ MediaPalace mp =new MediaPalace();
 	@Override
 	public void paintComponent(Graphics g) {
 		g.drawImage(backgroundImage, 0, 0, null);
+		
+		
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		MouseEvent keyEvent = null;
+		backgroundImage.getRGB(keyEvent.getX(), keyEvent.getY());
 	}
 
 	@Override
