@@ -15,7 +15,9 @@ void setup(){
 void draw(){
   if(isAlive==false){
    background(0, 0, 255);
+   fill(255,255,255);
 text("Score: "+score, 500, 800);
+
   }
  else{ background(0, 0, 255);
   fill(255, 0, 0);
@@ -40,7 +42,7 @@ isAlive =false;
  }
  
  if(y==1000){
-        background(0, 0, 255);
+       isAlive=false;
   
  }
 }
