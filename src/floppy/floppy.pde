@@ -1,17 +1,39 @@
+
 int x= 500;
-int y= 1000;
-Car c = new Car(100, 100,10, 150);
- Car c1 = new Car(500, 100,10 , 150);
- Car c2 = new Car(900, 100,10 , 150);
+int y= 999;
+Car c = new Car(100, 1,10, 150);
+ Car c1 = new Car(500, 999,10 , 150);
+ Car c2 = new Car(900, 1,10 , 150);
 void setup(){
  size(1000,1000); 
 }
 
 void draw(){
- background(0,0,255);
+ if(intersects(c)){
+     background(0,0,255);
+ }
+  else if (intersects(c1)){
+     background(0,0,255);
+  }
+  
+  else if(intersects(c2)){
+     background(0,0,255);
+  }
+  
+  else{
+  background(0,0,255);
  fill(0,255,0);
  ellipse(x,y,50,50);
- display();
+ keyPressed();
+ boundry();
+ c.display();
+ c.Rc();
+ c1.display();
+ c1.Lc();
+ c2.display();
+ c2.Rc();
+ 
+  }
 }
 
 
@@ -20,19 +42,19 @@ void keyPressed()
       if(key == CODED){
             if(keyCode == UP)
             {
-                y -=100;
+                y -=5;
             }
             else if(keyCode == DOWN)
             {
-                  y=+ 100; 
+                  y+=5; 
             }
             else if(keyCode == RIGHT)
             {
-                 x=+ 100;
+                 x+= 5;
             }
             else if(keyCode == LEFT)
             {
-                x -=100;  //Frog X position goes left
+                x -=5;  //Frog X position goes left
             }
       }
 }
@@ -56,7 +78,16 @@ void boundry(){
     
    }
   
-  
+}
+  boolean intersects(Car car) {
+      if ((y > car.getY() && y < car.getY()+50) && (x > car.getX() && x < car.getX()+car.getSize()))
+      {
+             return true;
+      }
+      else 
+      {
+             return false;
+      }
 }
 
 
@@ -75,7 +106,7 @@ class Car{
     this.y=y;
     speed=s;
     this.size=size;
-    
+   
     
   }
     
@@ -83,7 +114,36 @@ class Car{
 {
       fill(0,255,0);
       rect(x , y, size, 50);
-}
+      
     
+      
+      
+}
+void Rc(){
+  
+ if(x>=1000){
+   x=0;
+ }
+ x+=speed;
+}
+  void Lc(){
+   
+    if(x<=0){
+     x=1000; 
+    }
+     x-=speed;
   }
   
+  int getX(){
+    
+    return x;
+}
+int getY(){
+  return y;
+}
+int getSize(){
+  return size;
+}
+
+
+}
